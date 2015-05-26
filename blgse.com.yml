@@ -1,0 +1,19 @@
+nginx:
+  build: ./nginx
+  volumes:
+    - /home/ubuntu:/etc/nginx/sites-enabled
+    - /home/ubuntu:/var/log/nginx
+  ports:
+  	- "80:80"
+  links:
+    - blgse
+    - gin
+    - tonic
+
+blgse:
+  build: ./blgse
+  command: npm install && npm start
+  volumes:
+    - ./blgse:/home/blgse
+  ports:
+    - "9000"
